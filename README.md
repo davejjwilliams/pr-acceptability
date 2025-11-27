@@ -17,3 +17,12 @@ Dataset:
     - [ ] During Factors
     - [ ] Post Factors
 - [ ] Explore techniques for modelling combinations of factors together
+
+# Repository Structure
+
+- `initial-exploration/`: Directories containing initial analysis of factors which may affect PR acceptability.
+    - `pre-factors/`
+    - `during-factors/`
+    - `post-factors/`
+- `original-analysis-scripts/`: Analysis scripts from dataset repository (linked above)
+- `requirements.txt`: Requirements taken from dataset repository (linked above), feel free to add more
