@@ -17,5 +17,3 @@ Dataset:
     - [ ] During Factors
     - [ ] Post Factors
 - [ ] Explore techniques for modelling combinations of factors together
-
-
