@@ -51,3 +51,11 @@ venv/Scripts/activate
 ```bash
 pip install -r requirements.txt
 ```
+
+# Data Pre-Processing
+
+Before continuing to analysis scripts, run the cells in the [`data_prep.ipynb`](./data_prep.ipynb) notebook to annotate the PR dataframe with additional columns (e.g. turnaround time, code churn, etc.).
+
+The resulting dataframes can be found as CSVs under [`./data/filtered/`](./data/filtered/), which will be used in subsequent analysis scripts.
+
+A copy of the original dataset will also be saved under [`./data/original/`](./data/original/).
