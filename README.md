@@ -59,3 +59,9 @@ Before continuing to analysis scripts, run the cells in the [`data_prep.ipynb`](
 The resulting dataframes can be found as CSVs under [`./data/filtered/`](./data/filtered/), which will be used in subsequent analysis scripts.
 
 A copy of the original dataset will also be saved under [`./data/original/`](./data/original/).
+
+# Individual Factor Analysis
+
+Pre-requisite: running [`data_prep.ipynb`](./data_prep.ipynb) notebook (outlined in the [Data Pre-Processing](#data-pre-processing) section) to generate the filtered dataset.
+
+Next, we have conducted an analysis of individual factors suspected to contribute to the likelihood of PR acceptance. This analysis can be found in the [`exploring_factors.ipynb`](./exploring_factors.ipynb) notebook.
