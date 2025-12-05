@@ -9,3 +9,4 @@ cliffs-delta
 jupyter
 scipy
 huggingface_hub
+scikit-learn
