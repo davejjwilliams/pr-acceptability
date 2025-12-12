@@ -114,11 +114,12 @@ def create_histograms(accepted_prs, rejected_prs, max_comments=50):
     # Define bins
     bins = np.arange(0, max_comments + 2, 1)
 
-    # Histogram for accepted PRs
-    ax1.hist(accepted_filtered['num_comments'], bins=bins, color='#56B4E9',
-             alpha=0.7, edgecolor='black', linewidth=0.5)
+    # Histogram for accepted PRs (as percentage)
+    weights_accepted = np.ones_like(accepted_filtered['num_comments']) / len(accepted_prs) * 100
+    ax1.hist(accepted_filtered['num_comments'], bins=bins, weights=weights_accepted,
+             color='#56B4E9', alpha=0.7, edgecolor='black', linewidth=0.5)
     ax1.set_xlabel('Number of Comments', fontsize=11, fontweight='bold')
-    ax1.set_ylabel('Number of PRs', fontsize=11, fontweight='bold')
+    ax1.set_ylabel('Percentage of PRs (%)', fontsize=11, fontweight='bold')
     ax1.set_title('Distribution of Comments for Accepted PRs (Merged)\n(Repositories with >100 stars)',
                   fontsize=13, fontweight='bold', pad=15)
     ax1.grid(axis='y', alpha=0.3, linestyle='--')
@@ -132,11 +133,12 @@ def create_histograms(accepted_prs, rejected_prs, max_comments=50):
              fontsize=10, verticalalignment='top', horizontalalignment='right',
              bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
 
-    # Histogram for rejected PRs
-    ax2.hist(rejected_filtered['num_comments'], bins=bins, color='#D55E00',
-             alpha=0.7, edgecolor='black', linewidth=0.5)
+    # Histogram for rejected PRs (as percentage)
+    weights_rejected = np.ones_like(rejected_filtered['num_comments']) / len(rejected_prs) * 100
+    ax2.hist(rejected_filtered['num_comments'], bins=bins, weights=weights_rejected,
+             color='#D55E00', alpha=0.7, edgecolor='black', linewidth=0.5)
     ax2.set_xlabel('Number of Comments', fontsize=11, fontweight='bold')
-    ax2.set_ylabel('Number of PRs', fontsize=11, fontweight='bold')
+    ax2.set_ylabel('Percentage of PRs (%)', fontsize=11, fontweight='bold')
     ax2.set_title('Distribution of Comments for Rejected PRs (Closed, Not Merged)\n(Repositories with >100 stars)',
                   fontsize=13, fontweight='bold', pad=15)
     ax2.grid(axis='y', alpha=0.3, linestyle='--')
