@@ -1,5 +1,6 @@
 import pandas as pd
 import scipy.stats as stats
+import numpy as np
 
 
 def df_column_statistics(pr_df, column_name):
@@ -74,28 +75,39 @@ def fishers_exact_test(pr_df, feature_column):
 
 def chi_squared_test(pr_df, feature_column):
     """
-    Perform Chi-squared Test to analyze the relationship between a feature and PR acceptance.
+    Perform Chi-squared Test to analyze the relationship between a feature and PR acceptance,
+    and report effect size (Cramér's V).
 
     Parameters:
     - pr_df: DataFrame containing PR data
-    - feature_column: Name of the boolean column to test (e.g., 'related_issue')
-
-    Returns:
-    - Dictionary containing test results
+    - feature_column: Name of the boolean/categorical column to test (e.g., 'has_review')
     """
-    # Create contingency table
-    contingency_table = pd.crosstab(pr_df[feature_column], pr_df['accepted'])
+    # Contingency table
+    contingency_table = pd.crosstab(pr_df[feature_column], pr_df["accepted"])
 
     print(f"Chi-squared Test for '{feature_column}' vs 'accepted'")
     print("\nContingency Table:")
     print(contingency_table)
 
-    # Perform Chi-squared Test
+    # Chi-squared test
     chi2, p_value, dof, expected = stats.chi2_contingency(contingency_table)
+
+    # Sample size N (sum of all cells)
+    n = contingency_table.to_numpy().sum()
+
+    # Cramér's V
+    r, c = contingency_table.shape
+    k = min(r, c)
+    if k <= 1 or n == 0:
+        cramer_v = np.nan
+    else:
+        cramer_v = np.sqrt(chi2 / (n * (k - 1)))
 
     print(f"\nChi-squared statistic: {chi2:.4f}")
     print(f"P-value: {p_value:.15f}")
     print(f"Degrees of freedom: {dof}")
+    print(f"N: {n}")
+    print(f"Cramér's V: {cramer_v:.4f}")
 
 
 def filter_top_n_for_cols(pr_dataframe: pd.DataFrame, col_list: list[str], filter_percent=10):
