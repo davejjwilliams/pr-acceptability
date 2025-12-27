@@ -3,6 +3,23 @@ import scipy.stats as stats
 import numpy as np
 
 
+def conditional_acceptance_rate(df, bool_col):
+    accepted_with_condition = df[df[bool_col]]['accepted'].sum()
+    total_with_condition = df[df[bool_col]].shape[0]
+    rate_with_condition = accepted_with_condition / \
+        total_with_condition if total_with_condition > 0 else 0
+
+    accepted_without_condition = df[~df[bool_col]]['accepted'].sum()
+    total_without_condition = df[~df[bool_col]].shape[0]
+    rate_without_condition = accepted_without_condition / \
+        total_without_condition if total_without_condition > 0 else 0
+
+    print(
+        f"Acceptance rate for PRs with {bool_col}: {rate_with_condition * 100} ({accepted_with_condition}/{total_with_condition})")
+    print(
+        f"Acceptance rate for PRs without {bool_col}: {rate_without_condition * 100} ({accepted_without_condition}/{total_without_condition})")
+
+
 def df_column_statistics(pr_df, column_name):
     """
     Analyse statistics for a given column split by accepted and rejected PRs.
