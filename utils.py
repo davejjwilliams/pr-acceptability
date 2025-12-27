@@ -3,6 +3,14 @@ import scipy.stats as stats
 import numpy as np
 
 
+def percent_meeting_condition(df, bool_col):
+    total_prs = df.shape[0]
+    prs_meeting_condition = df[df[bool_col]].shape[0]
+    percent = (prs_meeting_condition / total_prs) * 100 if total_prs > 0 else 0
+    print(
+        f"Percentage of PRs with {bool_col}: {percent:.2f}% ({prs_meeting_condition}/{total_prs})")
+
+
 def conditional_acceptance_rate(df, bool_col):
     accepted_with_condition = df[df[bool_col]]['accepted'].sum()
     total_with_condition = df[df[bool_col]].shape[0]
