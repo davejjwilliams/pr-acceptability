@@ -133,6 +133,7 @@ def chi_squared_test(pr_df, feature_column):
     print(f"Degrees of freedom: {dof}")
     print(f"N: {n}")
     print(f"Cramér's V: {cramer_v:.4f}")
+    print(f"Summary: $\chi^2$ = {chi2:.2f}, $p$ < {"0.001" if p_value < 0.001 else f'{p_value:.3f}'}, Cramér's V = {cramer_v:.3f}")
 
 
 def filter_top_n_for_cols(pr_dataframe: pd.DataFrame, col_list: list[str], filter_percent=10):
